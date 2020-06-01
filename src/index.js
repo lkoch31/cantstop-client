@@ -52,18 +52,10 @@ const createRollOptions = (options) => {
 
   const brEl = document.createElement("BR");
 
-  const img1 = document.createElement("IMG");
-  img1.className = "diceImage"
-  img1.src = getDieImage(options.allDice[0]);
-  const img2 = document.createElement("IMG");
-  img2.className = "diceImage"
-  img2.src = getDieImage(options.allDice[1]);
-  const img3 = document.createElement("IMG");
-  img3.className = "diceImage";
-  img3.src = getDieImage(options.allDice[2]);
-  const img4 = document.createElement("IMG");
-  img4.className = "diceImage";
-  img4.src = getDieImage(options.allDice[3]);
+  const img1 = getDieImage(options.allDice[0], "diceImage");
+  const img2 = getDieImage(options.allDice[1], "diceImage");
+  const img3 = getDieImage(options.allDice[2], "diceImage");
+  const img4 = getDieImage(options.allDice[3], "diceImage");
 
   allDiceNode.appendChild(brEl);
   allDiceNode.appendChild(img1);
@@ -71,33 +63,57 @@ const createRollOptions = (options) => {
   allDiceNode.appendChild(img3);
   allDiceNode.appendChild(img4);
 
-  const firstOptionEl = document.getElementById("option1");
-  const allDiceNode = document.querySelector("#option1");
-  firstOptionEl.innerText = "Option 1: " + options.combination1[0].value + " " + options.combination1[1].value;
-  const brEl2 = document.createElement("BR");
+  const firstOptionEl = document.getElementById("option1text")
+  firstOptionEl.textContent = options.combination1[0].value + " " + options.combination1[1].value;
+  const firstOptionNode = document.querySelector("#option1");
+  getCombinationImages(firstOptionNode, options.combination1);
 
-  const secondOptionEl = document.getElementById("option2");
-  secondOptionEl.innerText = "Option 2: " + options.combination2[0].value + " " + options.combination2[1].value;
+  const secondOptionEl = document.getElementById("option2text")
+  secondOptionEl.textContent = options.combination2[0].value + " " + options.combination2[1].value;
+  const secondOptionNode = document.querySelector("#option2");
+  getCombinationImages(secondOptionNode, options.combination2);
 
-  const thirdOptionEl = document.getElementById("option3");
-  thirdOptionEl.innerText = "Option 3: " + options.combination3[0].value + " " + options.combination3[1].value;
+  const thirdOptionEl = document.getElementById("option3text")
+  thirdOptionEl.textContent = options.combination3[0].value + " " + options.combination3[1].value;
+  const thirdOptionNode = document.querySelector("#option3");
+  getCombinationImages(thirdOptionNode, options.combination3);
 }
 
-const getDieImage = (dieRoll) => {
+const getCombinationImages = (node, combination) => {
 
-  console.log(dieRoll);
+  const optimg1 = getDieImage(combination[0].dice[0], "diceImage");
+  const optimg2 = getDieImage(combination[0].dice[1], "endOfPairImage");
+  node.appendChild(optimg1);
+  node.appendChild(optimg2);
+
+  const optimg3 = getDieImage(combination[1].dice[0], "diceImage");
+  const optimg4 = getDieImage(combination[1].dice[1], "diceImage");
+  node.appendChild(optimg3);
+  node.appendChild(optimg4);
+
+}
+
+const getDieImage = (dieRoll, className) => {
+
+  const img = document.createElement("IMG");
+  img.className = className;
+
+  let src = "./src/img/six.PNG";
+
   if (dieRoll == 1) {
-    return "./src/img/one.PNG";
+    src = "./src/img/one.PNG";
   } else if (dieRoll == 2) {
-    return "./src/img/two.PNG";
+    src = "./src/img/two.PNG";
   } else if (dieRoll == 3) {
-    return "./src/img/three.PNG";
+    src = "./src/img/three.PNG";
   } else if (dieRoll == 4) {
-    return "./src/img/four.PNG";
+    src = "./src/img/four.PNG";
   } else if (dieRoll == 5) {
-    return "./src/img/five.PNG";
+    src = "./src/img/five.PNG";
   }
 
-  return "./src/img/six.PNG";
+  img.src = src;
+
+  return img;
 
 }

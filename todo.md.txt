@@ -1,0 +1,2 @@
+Use a button instead of the text for the different options
+Put a "pawn" on the board by making cell's background black
